@@ -48,9 +48,10 @@ def fn_B2(f_param,f_set,f_EB,f_ES_interp,bid_now,distr_b_bar_now):
 
 
 def fn_S2(f_param,f_set,f_EB_interp,f_ES,distr_b_2_now):
-    (f_beta,f_rho,f_w,f_J,f_alpha,f_sigma) = (f_param[0],f_param[1],f_param[2],f_param[3],f_param[4],f_param[5])
+    (f_beta,f_rho,f_w,f_alpha,f_sigma) = (f_param[0],f_param[1],f_param[2],f_param[4],f_param[5])
     (f_y_grid,f_lyg,f_b_grid,f_n_draws,f_state_grid) = (f_set[0],f_set[1],f_set[2],f_set[3],f_set[4])
     (f_lyg,f_lbg,f_lsg) = (len(f_y_grid),len(f_b_grid),len(f_state_grid))
+    f_J = len(f_w)
     keep = (f_w.reshape(f_J,1,1) + f_beta * f_ES) #dim: J x S x Y
     #V1 = utility of composite good consumption plus continuation value of keeping the car if not picked for auction
     V1 = (f_alpha*np.log((1-f_beta)*f_y_grid)).reshape(1,1,f_lyg) + (1-f_rho.reshape(f_J,1,1)) * keep
@@ -68,16 +69,13 @@ def fn_S2(f_param,f_set,f_EB_interp,f_ES,distr_b_2_now):
 # In[13]:
 
 
-def fn_iterate(f_param1,f_param2,f_set,
+def fn_iterate(f_param,f_set,
                B_start,S_start,n_iter,
               f_distr_R_states,f_transition_probs,
               f_y_realis,f_rival_bidders_ids,f_active_bidders_ids):
-    (f_alpha,f_w) = (f_param1[0],f_param1[1])
-    f_J = len(f_w)
-    (f_beta,f_rho,f_sigma) = (f_param2[0],f_param2[1],f_param2[2])
+    (f_beta,f_rho,f_w,f_J,f_alpha,f_sigma) = (f_param[0],f_param[1],f_param[2],f_param[3],f_param[4],f_param[5])
     (f_y_grid,f_lyg,f_b_grid,f_n_draws,f_state_grid) = (f_set[0],f_set[1],f_set[2],f_set[3],f_set[4])
     (f_lyg,f_lbg,f_lsg) = (len(f_y_grid),len(f_b_grid),len(f_state_grid))
-    f_param = [f_beta,f_rho,f_w,f_J,f_alpha,f_sigma]
     check = []
     bids_iter = []
     Buyer_iter = []
