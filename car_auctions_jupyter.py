@@ -10,22 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy.optimize
-from bayes_opt import BayesianOptimization
 import time
-########### Helper functions ################################
-
-def plot_bo(f, bo):
-    xs = [x["x"] for x in bo.res["all"]["params"]]
-    ys = bo.res["all"]["values"]
-    mean, sigma = bo.gp.predict(np.arange(len(f)).reshape(-1, 1), return_std=True)
-    plt.figure(figsize=(16, 9))
-    plt.plot(f)
-    plt.plot(np.arange(len(f)), mean)
-    plt.fill_between(np.arange(len(f)), mean+sigma, mean-sigma, alpha=0.1)
-    plt.scatter(bo.X.flatten(), bo.Y, c="red", s=50, zorder=10)
-    plt.xlim(0, len(f))
-    plt.ylim(f.min()-0.1*(f.max()-f.min()), f.max()+0.1*(f.max()-f.min()))
-    plt.show()
 
 '''
 Function to create a polynomial given coefficients:
@@ -126,16 +111,6 @@ class CarAuction:
         print(error)
         return -(error**2)
 
-
-    def error(self, f_EB_interp,f_ES_interp):
-        gp_params = {"alpha": 1e-5, "n_restarts_optimizer": 2}
-        bo = BayesianOptimization(f= lambda b: self.bid_fn_y2(f_EB_interp,f_ES_interp,100000, b, 1, 1),
-                                pbounds={"b": (0, 100000)},
-                                verbose=0)
-
-        bo.maximize(init_points=2, n_iter=25, acq="ucb", kappa=10, **gp_params)
-
-        plot_bo(f, bo)
     '''
     Buyer Value Function:-
     Arguments:
