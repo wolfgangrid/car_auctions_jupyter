@@ -31,7 +31,12 @@ wealth evolves endogenously, and return on other assets potentially influences p
   * The (red) crosses plot the average S&P500
   * The observed correlation may be driven (among other things) by the income effect of a higher stock market and by arbitrage between the two markets that equalises returns.
 
- "Correlation of average prices with the stock market"
+
+ <figure>
+    <img src='documentation/graph.png' alt='missing' width="350"/>
+    <figcaption>Correlation of average prices with the stock market</figcaption>
+</figure>
+
 <p align="center">
   <img src="documentation/graph.png" width="350"/>
 </p>
