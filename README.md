@@ -30,3 +30,5 @@ wealth evolves endogenously, and return on other assets potentially influences p
   * ![equation](http://latex.codecogs.com/gif.latex?%5Ctext%7Bln%7D%28p_%7Bi%2Ct%7D%29%20%3D%20%5Cgamma_y%20&plus;%20%5Ctheta_j%20&plus;%20%5Cepsilon_%7Bi%2Ct%7D), where *i* indexes cars, *j* indexes model-year-built, *y* indexes the year
   * The (red) crosses plot the average S&P500
   * The observed correlation may be driven (among other things) by the income effect of a higher stock market and by arbitrage between the two markets that equalises returns.
+
+![alt text](documentation/graph.png "Correlation of average prices with the stock market")
