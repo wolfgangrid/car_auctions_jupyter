@@ -14,17 +14,12 @@ from bayes_opt import BayesianOptimization
 import time
 ########### Helper functions ################################
 
-def plot_bo(f, bo):
+def plot_bo(bo):
     xs = [x["x"] for x in bo.res["all"]["params"]]
     ys = bo.res["all"]["values"]
     mean, sigma = bo.gp.predict(np.arange(len(f)).reshape(-1, 1), return_std=True)
     plt.figure(figsize=(16, 9))
-    plt.plot(f)
-    plt.plot(np.arange(len(f)), mean)
-    plt.fill_between(np.arange(len(f)), mean+sigma, mean-sigma, alpha=0.1)
     plt.scatter(bo.X.flatten(), bo.Y, c="red", s=50, zorder=10)
-    plt.xlim(0, len(f))
-    plt.ylim(f.min()-0.1*(f.max()-f.min()), f.max()+0.1*(f.max()-f.min()))
     plt.show()
 
 '''
@@ -124,7 +119,7 @@ class CarAuction:
         EB_dont = f_EB_interp[j,s](y)
         error = (f_alpha/(1-f_beta)) * y * f_w[j] + f_beta*(ES_buy - EB_dont) - b
         print(error)
-        return -(error**2)
+        return error**2
 
 
     def error(self, f_EB_interp,f_ES_interp):
@@ -135,7 +130,7 @@ class CarAuction:
 
         bo.maximize(init_points=2, n_iter=25, acq="ucb", kappa=10, **gp_params)
 
-        plot_bo(f, bo)
+        plot_bo(bo)
     '''
     Buyer Value Function:-
     Arguments:

@@ -156,10 +156,10 @@ def bayesian_optimisation(n_iters, sample_loss, bounds, x0=None, n_pre_samples=5
         # Sample next hyperparameter
         if random_search:
             x_random = np.random.uniform(bounds[:, 0], bounds[:, 1], size=(random_search, n_params))
-            ei = -1 * expected_improvement(x_random, model, yp, greater_is_better=True, n_params=n_params)
+            ei = -1 * expected_improvement(x_random, model, yp, greater_is_better=False, n_params=n_params)
             next_sample = x_random[np.argmax(ei), :]
         else:
-            next_sample = sample_next_hyperparameter(expected_improvement, model, yp, greater_is_better=True, bounds=bounds, n_restarts=100)
+            next_sample = sample_next_hyperparameter(expected_improvement, model, yp, greater_is_better=False, bounds=bounds, n_restarts=100)
 
         # Duplicates will break the GP. In case of a duplicate, we will randomly sample a next query point.
         if np.any(np.abs(next_sample - xp) <= epsilon):
