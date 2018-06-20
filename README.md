@@ -36,3 +36,4 @@ wealth evolves endogenously, and return on other assets potentially influences p
     <img src='documentation/graph.png' alt='missing' width="450"/>
     <figcaption>Correlation of average prices with the stock market</figcaption>
 </figure>
+aas
